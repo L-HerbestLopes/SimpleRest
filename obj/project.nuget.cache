@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "kfJ4a7ARE0Y=",
+  "success": true,
+  "projectFilePath": "/home/lu/Projects/CSharp/learning/SimpleRest/SimpleRest.csproj",
+  "expectedPackageFiles": [
+    "/home/lu/.nuget/packages/microsoft.aspnetcore.openapi/10.0.3/microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "/home/lu/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
