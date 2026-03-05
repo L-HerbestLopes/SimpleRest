@@ -1,6 +1,11 @@
 @SimpleRest_HostAddress = http://localhost:5216
 
-GET {{SimpleRest_HostAddress}}/weatherforecast/
-Accept: application/json
+GET {{SimpleRest_HostAddress}}/greeting/
+Accept: text/plain
+
+###
+
+GET {{SimpleRest_HostAddress}}/greeting?name=Fulano/
+Accept: text/plain
 
 ###
