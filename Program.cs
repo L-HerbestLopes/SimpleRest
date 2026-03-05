@@ -1,9 +1,8 @@
+using System;
+
+// Configure and build web application.
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -14,28 +13,27 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+// Start randomizer object
+var random = new Random();
+
+var greeting_strings = new[]
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    "Hello", "Hi", "Welcome", "Greetings"
 };
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/greeting", (HttpRequest request) =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    // Greeting has a random start
+    int index = random.Next(0, greeting_strings.Length);
+    string greeting = greeting_strings[index];
+
+    var name = request.Query["name"];
+
+    // Concatenates name or defaults to "visitor"
+    greeting += (name.Count == 0) ? ", visitor!" : $", {name[0]}!";
+
+    return greeting;
 })
-.WithName("GetWeatherForecast");
+.WithName("GetGreeting");
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
